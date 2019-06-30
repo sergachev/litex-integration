@@ -10,7 +10,7 @@ LITEX_ENV_COMPOSED_REPO=docker-litex-env-composed
 FIRMWARE_DIR=litex-integration/firmware
 
 # Passed to litex top-level script
-ACTION?=build_lib
+SOC_ARGS?=litex.boards.platforms.arty
 # TTY device
 TTY_DEV?=/dev/ttyUSB1
 
@@ -18,7 +18,7 @@ TTY_DEV?=/dev/ttyUSB1
 # Xilinx PATH
 XIL_PATH?=/opt/Xilinx
 # Vivado version
-VIVADO_VER?=2018.2
+VIVADO_VER?=2019.1
 
 DOCKER_IMAGE="litex-env"
 # Docker command defualt options
@@ -36,7 +36,7 @@ run: sanity prepare-env
 		-v "${PWD}"/litex-integration:/litex-integration \
 		-v "${PWD}"/build:/build \
 		$(DOCKER_IMAGE) \
-		python3 /litex-integration/base_cpu.py $(ACTION)"
+		python3 /litex-integration/simple.py $(SOC_ARGS)"
 
 %.bin:
 	bash -c " \
